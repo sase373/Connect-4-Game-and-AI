@@ -1,2 +1,13 @@
 # Connect-4-Game-and-AI
 A working connect 4 interface coded with OCAML. Accompanied by a look ahead 3 AI. 
+
+       A player would interact with the program by opening the REPL, calling the relevant files-- game, referee, ai_player, and human_player with #use, creating the module they wish to play, and then asking the referee to play game. The player will be prompted with a board (including 0Õs for blank spots, 1Õs indicating player one tokens, and 2Õs indicating player 2 tokens) and a message that is their turn within terminal. The player will make a move by pressing a number representing the column they wish their token to fall into, with first column being column 1. The computer will make the move, and if playing against Êa friend, the friend will be prompted by the new subsequent new board, and the pattern of play will continue until either one player wins or there is a draw. 
+       If playing against an AI, the Ai will (behind the scenes) also be prompted with a new board, evaluate the possible moves it could make, and choose the move in their best interest, thinking 3 potential game states away. The human player will then be prompted by the terminal by the new board including the AIÕs move, unless the AI moved to create a win or draw. 
+
+There are 8 program pieces.
+Sig game and Sig player include all the base type and function types signatures used in game and player modules.
+Game.ml includes the module for a connect 4 game. It consists of all the details of our connect 4 implementation, such as how to create an initial board, the valid moves given a board, the correct result of making a move on a certain board, a function that checks for wins, draws, another one that calculates an estimate of the board for player 1, and more. 
+Human PLayer and AI player are two implementations of the player module. Human player is a functor that takes in module connect 4 to produce a new module for human player of connect 4. Human Player also ensures that the move input by a human is legal, or valid given the current connect 4 board. 
+AiPLayer does similarly, but also includes functions that helps the AI choose their next move. The majority of this work is done by the function Minimax. Minimax takes in a state and evaluates the results of all the possible moves they could make, by predicting what the other playerÕs immediate response will be. The Ai then chooses the move that maximizes their chance of winning, (as predicted by our estimate value function). 
+The Referee will conduct the game by calling the players in alternate ways, and ending the game if there is a draw or a win. 
+
